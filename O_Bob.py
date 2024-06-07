@@ -4,6 +4,8 @@ import datetime
 import wikipedia
 import pywhatkit
 from tkinter import *
+import sys
+
 
 audio = sr.Recognizer()
 maquina = pyttsx3.init()
@@ -11,6 +13,8 @@ maquina = pyttsx3.init()
 def executa_comando():
  try:
     with sr.Microphone() as source:
+        maquina.say('Eu sou o Bob, como posso ajudar?')
+        maquina.runAndWait()
         print('Ouvindo...')
         voz = audio.listen(source)
         comando = audio.recognize_google(voz, language='pt-BR')
@@ -42,23 +46,28 @@ def comando_voz_usuario():
      resultado = pywhatkit.playonyt(musica)
      maquina.say("Tocando música")
      maquina.runAndWait()
-
+ elif "desligar" in comando:
+   sys.exit()
+ 
   
 
 
-
-comando_voz_usuario
-
-bob = Tk()
-bob.geometry('400x300')
-bob.title('Eu sou o Bob')
+while True:
+ comando_voz_usuario()
 
 
-lbl = Label(bob, text='Fala ai, estou te...')
-lbl.grid(column=0, row=0, padx=20 , pady=70)
+#bob = Tk()
+#bob.geometry('400x300')
+#bob.title('Eu sou o Bob')
+#bob.config(bg='#c7bf56')
 
 
-b=Button(bob, text='Aperte para falar' , command= comando_voz_usuario )
-b.grid(column=0, row=1)
+#lbl = Label (bob, text='Oi, eu sou o Bob', foreground='yellow', bg='black' )(font = ('orca role, 20'))
+#lbl.grid(column=0, row=0, padx=20 , pady=60,)
 
-bob.mainloop()
+
+#b=Button(bob, text='Aperte para eu poder te ouvir :)' , command= comando_voz_usuario,
+ #        foreground='darkblue', bg='lightblue')
+#b.grid(column=0, row=1, padx=20, pady=10)
+
+#bob.mainloop()
